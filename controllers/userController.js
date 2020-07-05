@@ -10,6 +10,19 @@ const createUser = async (req, res) => {
   }
 }
 
+const fetchUsersEmailId = async () => {
+  try {
+    const users = await userModel.fetch({
+      select: "email"
+    });
+    return users;
+  } catch (error) {
+    console.error("Error in fetching users from DB", error);
+    throw new Error(error.toString());
+  }
+}
+
 module.exports = {
-  createUser
+  createUser,
+  fetchUsersEmailId,
 }

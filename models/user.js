@@ -1,7 +1,8 @@
 const Mongoose = require("mongoose");
 
-const userSchema = require("../helpers/Schema/UserSchema").userSchema;
+const userSchema = require("../helpers/Schema/userSchema").userSchema;
 const utils = require("../helpers/utility/utils");
+const { Logger } = require("mongodb");
 
 const userModal = Mongoose.model("users", userSchema, "users");
 
@@ -14,10 +15,24 @@ const create = async (
     return newUser;
   } catch (error) {
     console.error("Error in creating new user", error);
-    return error;
+    throw new Error(error.toString());
+  }
+}
+
+const fetch = async ({
+  filter = {},
+  select = ""
+}) => {
+  try {
+    const users = await userModal.find(filter).select(select);
+    return users;
+  } catch (error) {
+    console.error("Error in fetching users", error);
+    throw error;
   }
 }
 
 module.exports = {
-  create
+  create,
+  fetch,
 }

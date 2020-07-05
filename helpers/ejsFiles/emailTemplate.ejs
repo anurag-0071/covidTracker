@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 50%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    
+    <!-- Header message -->
+    <h4>Here is your daily update of COVID-19 cases data in India:</h4>
+    <!-- New Cases -->
+    <h5>New cases: <b> <%= data.newCases %></b></h5>
+    <!-- Total Cases -->
+    <h5>Total Cases: <b> <%= data.totalCases %></b></h5>
+    <!-- state-wise breakdown table -->
+    <table>
+      <tr>
+        <th>State Name</th>
+        <th>New Cases</th>
+        <th>Total Cases</th>
+      </tr>
+      <% for(let i = 0; i < data.stateWiseData.length; i++) { %>
+        <tr>
+          <td><%= data.stateWiseData[i].name %></td>
+          <td><%= data.stateWiseData[i].newCases %></td>
+          <td><%= data.stateWiseData[i].totalCases %></td>
+        </tr>
+      <% } %>
+    </table>
+  </div>
+</body>
+
+</html>
